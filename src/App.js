@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { TodoForm } from './components/todo/TodoForm.js';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -28,16 +30,13 @@ class App extends Component {
           <h2>React Todos</h2>
         </div>
         <div className="Todo-App">
-          <form>
-            <input onChange={this.handleInputChange} type="text"/>
-          </form>
+          <TodoForm handleInputChange={this.handleInputChange} currentTodo={this.state.currentTodo} />
           <div className="Todo-List">
             <ul>
               {this.state.todos.map(todo =>
                 <li key={todo.id}>
                   <input
                     type="checkbox"
-                    value={this.state.currentTodo}
                     defaultChecked={todo.isComplete}/>{todo.name}
                 </li>)}
             </ul>
