@@ -7,3 +7,8 @@ export const TodoItem = ({ name, isComplete }) => (
       defaultChecked={isComplete}/>{name}
   </li>
 );
+
+React.propTypes = {
+  name: React.PropTypes.string.isRequired,
+  isComplete: React.PropTypes.bool.isRequired,
+}

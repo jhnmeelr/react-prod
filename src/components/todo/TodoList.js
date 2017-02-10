@@ -9,3 +9,7 @@ export const TodoList = ({ todos }) => (
     </ul>
   </div>
 );
+
+React.propTypes = {
+  todos: React.PropTypes.array.isRequired,
+}
