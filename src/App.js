@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import { addTodo, generateId } from './lib/todoHelpers';
+import { addTodo, generateId, findById, toggleTodo, updateTodo } from './lib/todoHelpers';
 
 import { TodoForm, TodoList } from './components/todo';
 
@@ -35,6 +35,13 @@ class App extends Component {
     });
   }
 
+  handleToggle = (id) => {
+    const todo = findById(id, this.state.todos);
+    const toggled = toggleTodo(todo);
+    const updatedTodos = updateTodo(this.state.todos, toggled);
+    this.setState({ todos: updatedTodos });
+  }
+
   render() {
     const submitHandler = this.state.currentTodo ? this.handleSubmit : this.handleEmptySubmit;
 
@@ -50,7 +57,7 @@ class App extends Component {
             handleSubmit={submitHandler}
             handleInputChange={this.handleInputChange}
             currentTodo={this.state.currentTodo} />
-          <TodoList todos={this.state.todos}/>
+          <TodoList handleToggle={this.handleToggle} todos={this.state.todos}/>
         </div>
       </div>
     );

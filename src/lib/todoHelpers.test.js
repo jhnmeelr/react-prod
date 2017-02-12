@@ -92,5 +92,5 @@ test('updateTodo should not mutate the original array', () => {
 
   const result = updateTodo(startTodos, updatedTodo);
 
-  expect(result).not.toBe(startTodos);
+  expect(result).not.toBe (startTodos);
 });
