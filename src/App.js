@@ -7,38 +7,28 @@ import { addTodo, generateId } from './lib/todoHelpers';
 import { TodoForm, TodoList } from './components/todo';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todos: [
-        { id: 1, name: 'Learn JSX', isComplete: true },
-        { id: 2, name: 'Build An Awesome App', isComplete: false },
-        { id: 3, name: 'Ship It!', isComplete: false }
-      ],
-      currentTodo: ''
-    }
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleEmptySubmit = this.handleEmptySubmit.bind(this);
+  state = {
+    todos: [
+      { id: 1, name: 'Learn JSX', isComplete: true },
+      { id: 2, name: 'Build An Awesome App', isComplete: false },
+      { id: 3, name: 'Ship It!', isComplete: false }
+    ],
+    currentTodo: ''
   }
 
-  handleInputChange(e) {
+  handleInputChange = (e) => {
     this.setState({ currentTodo: e.target.value });
   }
 
-  handleSubmit(e) {
-    if (this.state.currentTodo) {
-      e.preventDefault();
-      const newId = generateId();
-      const newTodo = { id: newId, name: this.state.currentTodo, isComplete: false };
-      const updatedTodos = addTodo(this.state.todos, newTodo);
-      this.setState({ todos: updatedTodos, currentTodo: '', errorMessage: '' });
-    } else {
-      
-    }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const newId = generateId();
+    const newTodo = { id: newId, name: this.state.currentTodo, isComplete: false };
+    const updatedTodos = addTodo(this.state.todos, newTodo);
+    this.setState({ todos: updatedTodos, currentTodo: '', errorMessage: '' });
   }
 
-  handleEmptySubmit(e) {
+  handleEmptySubmit = (e) => {
     e.preventDefault();
     this.setState({
       errorMessage: 'Please supply a todo name'
