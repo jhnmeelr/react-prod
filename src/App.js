@@ -4,7 +4,7 @@ import './App.css';
 
 import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo, filterTodos } from './lib/todoHelpers';
 import { pipe, partial } from './lib/utils';
-import { loadTodos, createTodo } from './lib/todoService';
+import { loadTodos, createTodo, saveTodo } from './lib/todoService';
 
 import { TodoForm, TodoList, Footer } from './components/todo';
 
@@ -56,9 +56,13 @@ class App extends Component {
   }
 
   handleToggle = (id) => {
-    const getUpdatedTodos = pipe(findById, toggleTodo, partial(updateTodo, this.state.todos));
-    const updatedTodos = getUpdatedTodos(id, this.state.todos);
+    const getToggleTodo = pipe(findById, toggleTodo);
+    const updated = getToggleTodo(id, this.state.todos);
+    const getUpdatedTodos = partial(updateTodo, this.state.todos);
+    const updatedTodos = getUpdatedTodos(updated);
     this.setState({ todos: updatedTodos });
+    saveTodo(updated)
+      .then(() => this.showTempMessage('Todo updated'));
   }
 
   render() {
