@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import { addTodo, generateId, findById, toggleTodo, updateTodo } from './lib/todoHelpers';
+import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo } from './lib/todoHelpers';
 import { pipe, partial } from './lib/utils';
 
 import { TodoForm, TodoList } from './components/todo';
@@ -15,6 +15,12 @@ class App extends Component {
       { id: 3, name: 'Ship It!', isComplete: false }
     ],
     currentTodo: ''
+  }
+
+  handleRemove = (id, e) => {
+    e.preventDefault();
+    const updatedTodos = removeTodo(this.state.todos, id);
+    this.setState({ todos: updatedTodos });
   }
 
   handleInputChange = (e) => {
@@ -57,7 +63,9 @@ class App extends Component {
             handleSubmit={submitHandler}
             handleInputChange={this.handleInputChange}
             currentTodo={this.state.currentTodo} />
-          <TodoList handleToggle={this.handleToggle} todos={this.state.todos}/>
+          <TodoList handleToggle={this.handleToggle}
+            handleRemove={this.handleRemove}
+            todos={this.state.todos}/>
         </div>
       </div>
     );
