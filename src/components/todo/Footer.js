@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '../router';
 
-export const Footer = ({  }) => {
+export const Footer = () => {
   return (
     <div className="Footer">
       <Link to='/'>All</Link>
