@@ -5,7 +5,7 @@ import './App.css';
 import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo } from './lib/todoHelpers';
 import { pipe, partial } from './lib/utils';
 
-import { TodoForm, TodoList } from './components/todo';
+import { TodoForm, TodoList, Footer } from './components/todo';
 
 class App extends Component {
   state = {
@@ -66,6 +66,7 @@ class App extends Component {
           <TodoList handleToggle={this.handleToggle}
             handleRemove={this.handleRemove}
             todos={this.state.todos}/>
+          <Footer />
         </div>
       </div>
     );
